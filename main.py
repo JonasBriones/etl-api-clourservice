@@ -42,7 +42,7 @@ async def upload(request: Request):
         return {
             "status": "OK",
             "filename": filename,
-            "data": json_string,
+            "records": json_string,
             "total": len(json_string)
         }
     
