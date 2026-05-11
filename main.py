@@ -7,6 +7,14 @@ import json
 
 app = FastAPI()
 
+@app.get("/")
+async def main():
+    print("*** INICIO DE LA API ***")
+    return {
+        "status": "OK",
+        "mensaje": "Inicio de la api"
+    }
+
 @app.post("/upload")
 async def upload(file: UploadFile):
     print("*** Inicio del servicio ****")
