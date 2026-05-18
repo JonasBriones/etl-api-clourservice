@@ -36,7 +36,7 @@ async def upload(request: Request):
         if filename.endswith(".xlsx"):
             df = pd.read_excel(BytesIO(file_bytes))
             df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
-
+            df = df.where(pd.notnull(df), None)
             #print(df.columns)
             records_list = df.to_dict(orient='records')
         return {
