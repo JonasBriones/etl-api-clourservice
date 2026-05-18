@@ -36,9 +36,10 @@ async def upload(request: Request):
         if filename.endswith(".xlsx"):
             df = pd.read_excel(BytesIO(file_bytes))
             df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
+            df['title'] = df['number']
 
             columnas_deseadas = [
-                'number',
+                'title',
                 'state', 
                 'assigned_to',
                 'short_description',
