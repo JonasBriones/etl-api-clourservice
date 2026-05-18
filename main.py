@@ -42,13 +42,18 @@ async def upload(request: Request):
                 'state', 
                 'assigned_to',
                 'short_description',
-                'priority'
+                'priority',
+                'short_description',
+                'task_type',
+                'description',
+                'assignment_group',
+                'work_notes'
             ]
 
             # Filtrar solo las columnas que existen en el DataFrame
             columnas_existentes = [col for col in columnas_deseadas if col in df.columns]
             df_filtrado = df[columnas_existentes]
-            
+            df_filtrado['work_notes'] = df_filtrado['work_notes'].fillna('')
             df_filtrado['assigned_to'] = df_filtrado['assigned_to'].fillna('SIN ASIGNAR')
             
             records_list = df_filtrado.to_dict(orient='records')
