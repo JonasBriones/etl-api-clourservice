@@ -38,12 +38,12 @@ async def upload(request: Request):
             df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
 
             #print(df.columns)
-            json_string = df.to_json(orient='records')
+            records_list = df.to_dict(orient='records')
         return {
             "status": "OK",
             "filename": filename,
-            "records": json_string,
-            "total": len(json_string)
+            "records": records_list,
+            "total": len(df)
         }
     
     except Exception as e:
