@@ -36,7 +36,8 @@ async def upload(request: Request):
         if filename.endswith(".xlsx"):
             df = pd.read_excel(BytesIO(file_bytes))
             df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
-            
+            df['assigned_to'] = df['assigned_to'].fillna('SIN ASIGNAR')
+            df['waiting_for'] = df['assigned_to'].fillna('')
             # 1. Encontrar qué columnas tienen NaN
             nan_columns = df.columns[df.isna().any()].tolist()
             print(f"Columnas con NaN: {nan_columns}")
